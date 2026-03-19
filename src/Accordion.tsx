@@ -2,7 +2,7 @@ import { useState } from "react";
 import AccordionItem from "./AccordionItem";
 
 function Accordion({ items }) {
-const {activeIndex, setActiveIndex} = useState(null)
+const [activeIndex, setActiveIndex] = useState(null)
 
 const handleClick = (index) => {
     setActiveIndex(prevIndex =>(prevIndex === index ? null : index))
