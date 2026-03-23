@@ -21,7 +21,9 @@ const data = [
 ];    
 
   return (
-    <Accordion items={data}/>
+    <div className='page-container'>
+      <Accordion items={data}/>
+    </div>
   )
 }
 

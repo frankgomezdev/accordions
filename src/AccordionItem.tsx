@@ -1,24 +1,19 @@
-import { useRef } from "react"
+type Props = {
+  title: string;
+  children: string;
+  isOpen: boolean;
+  onToggle: () => void;
+};
 
-
-function AccordionItem({ title, content, isOpen, onClick }) {
-  const contentHeight = useRef(null)  
+function AccordionItem({ title, children, isOpen, onToggle }: Props) {
   return (
-    <div>
-        <button className="accordion-btn" onClick={onClick}>
-            <h3 className="accordion-title">{title}</h3>
-            <span>{isOpen ? '-' : '+'}</span>
-        </button>
-        <div 
-            className="accordion-content" 
-            ref={contentHeight}
-            style={{
-          height: isOpen ? contentHeight.current.scrollHeight: 0
-            }} 
-        >
-            <div className="accordion-content-inner">{content}</div>
-        </div>
-    </div>
-  )
+    <section className="accordion-item">
+      <button className="accordion-header" onClick={onToggle}>
+        <span className="accordion-title">{title}</span>
+        <span className="accordion-icon">{isOpen ? "−" : "+"}</span>
+      </button>
+      {isOpen && <p className="accordion-content">{children}</p>}
+    </section>
+  );
 }
-export default AccordionItem
+export default AccordionItem;

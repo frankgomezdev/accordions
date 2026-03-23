@@ -1,27 +1,31 @@
 import { useState } from "react";
 import AccordionItem from "./AccordionItem";
 
-function Accordion({ items }) {
-const [activeIndex, setActiveIndex] = useState(null)
+type Props = {
+  items: { title: string; content: string }[];
+};
 
-const handleClick = (index) => {
-    setActiveIndex(prevIndex =>(prevIndex === index ? null : index))
-}
- 
+function Accordion({ items }: Props) {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const handleToggle = (index: number) => {
+    setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
+  };
 
   return (
-    <div>
-        {items.map((item, index) => (
-            <AccordionItem
-                key={index} 
-                title={item.title} 
-                content={item.content}
-                isOpen={activeIndex === index} 
-                onClick={() => handleClick(index)}
-            />
-        ))}
+    <div className="accordion-container">
+      {items.map((item, index) => (
+        <AccordionItem
+          key={item.title}
+          title={item.title}
+          isOpen={activeIndex === index}
+          onToggle={() => handleToggle(index)}
+        >
+          {item.content}
+        </AccordionItem>
+      ))}
     </div>
-  )
+  );
 }
 
 export default Accordion;
